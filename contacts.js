@@ -1,5 +1,5 @@
 const fs = require("fs").promises;
-const path = require("node:path");
+const { v4: uuidv4 } = require("uuid");
 
 const contactsPath = "./db/contacts.json";
 
@@ -43,7 +43,7 @@ const removeContact = async (contactId) => {
 };
 
 const addContact = async (name, email, phone) => {
-  const newContact = { name, email, phone };
+  const newContact = { id: uuidv4(), name, email, phone };
 
   try {
     const data = await fs.readFile(contactsPath);
